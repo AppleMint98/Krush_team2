@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Builder
+@ToString
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SubGoal extends BaseEntity {

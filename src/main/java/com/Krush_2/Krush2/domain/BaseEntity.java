@@ -5,6 +5,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,10 +26,9 @@ public class BaseEntity {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    private String status;
+    private String status = "Active";
 
-    @PrePersist
-    public void prePersist() {
-        status = "Active";
+    public void changeStatusToInActive() {
+        this.status = "InActive";
     }
 }

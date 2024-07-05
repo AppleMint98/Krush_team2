@@ -21,6 +21,7 @@ public enum ExceptionResponseStatus implements BaseSatus {
 
   // goal
   GOAL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 목표 입니다."),
+
   SUBGOAL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 하위목표 입니다."),
   MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 멤버 입니다."),
 

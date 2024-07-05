@@ -22,7 +22,7 @@ public class Diary extends BaseEntity {
     @JoinColumn
     private SubGoal subGoal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Member member;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn
+//    private Member member;
 }
