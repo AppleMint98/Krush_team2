@@ -3,22 +3,18 @@ package com.Krush_2.Krush2.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "SubGoal")
-public class SubGoal {
+public class SubGoal extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sub_goal_id")
     private Long subGoalId;
-
-    @Column(name = "status", nullable = false, length = 10)
-    private String status;
 
     @Column(name = "contents", length = 10)
     private String contents;
