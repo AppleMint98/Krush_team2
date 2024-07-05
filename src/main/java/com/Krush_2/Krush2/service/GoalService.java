@@ -20,6 +20,7 @@ public class GoalService {
   private final SubGoalRepository subGoalRepository;
 
   public void register(GoalDto request) {
+    validateGoalContents(request.getContents());
     Goal savedGoal = goalRepository.save(Goal.builder()
       .startAt(request.getStartAt())
       .endAt(request.getEndAt())
@@ -33,6 +34,12 @@ public class GoalService {
           .build());
       }
     );
+  }
+
+  private void validateGoalContents(String contents) {
+    if (goalRepository.existsByContents(contents)) {
+      throw new CustomException(ExceptionResponseStatus.DUPLICATION_GOAL_CONTENTS);
+    }
   }
 
   public GoalDto getInfo(long goalId) {
