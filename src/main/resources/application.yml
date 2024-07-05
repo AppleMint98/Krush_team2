@@ -5,9 +5,9 @@ spring:
 ---
 spring:
   datasource:
-    url: ${MYSQL_URL}
+    url: jdbc:mysql://localhost:3306/team2
     username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
+    password: ${MYSQL_USERNAME}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

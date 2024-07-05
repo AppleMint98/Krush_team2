@@ -21,7 +21,10 @@ public enum ExceptionResponseStatus implements BaseSatus {
 
   // goal
   GOAL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 목표 입니다."),
-  DUPLICATION_GOAL_CONTENTS(HttpStatus.BAD_REQUEST, "이미 존재하는 목표입니다.");
+  DUPLICATION_GOAL_CONTENTS(HttpStatus.BAD_REQUEST, "이미 존재하는 목표입니다."),
+
+  // sub goal
+  SUB_GOAL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 하위 목표 입니다.");
 
   private final HttpStatus status;
   private final String message;
