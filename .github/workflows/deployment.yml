@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: ap-northeast-2a
+  AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: team2-git-actions-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: team2-codedeploy-app
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: team2-codedeploy-deployment-group
