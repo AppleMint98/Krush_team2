@@ -1,4 +1,4 @@
-package com.Krush_2.Krush2.response;
+package com.Krush_2.Krush2.response.status;
 
 import org.springframework.http.HttpStatus;
 

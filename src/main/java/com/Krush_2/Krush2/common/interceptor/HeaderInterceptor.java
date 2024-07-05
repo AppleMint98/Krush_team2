@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserIdInterceptor implements HandlerInterceptor {
+public class HeaderInterceptor implements HandlerInterceptor {
 
     private final MemberService memberService;
 

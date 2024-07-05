@@ -1,6 +1,6 @@
 package com.Krush_2.Krush2.exception;
 
-import com.Krush_2.Krush2.response.BaseSatus;
+import com.Krush_2.Krush2.response.status.BaseSatus;
 import lombok.Getter;
 
 @Getter

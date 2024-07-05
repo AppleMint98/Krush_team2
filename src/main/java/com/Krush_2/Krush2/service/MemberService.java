@@ -3,7 +3,7 @@ package com.Krush_2.Krush2.service;
 import com.Krush_2.Krush2.domain.Member;
 import com.Krush_2.Krush2.dto.MemberDto;
 import com.Krush_2.Krush2.exception.CustomException;
-import com.Krush_2.Krush2.response.ExceptionResponseStatus;
+import com.Krush_2.Krush2.response.status.ExceptionResponseStatus;
 import com.Krush_2.Krush2.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
