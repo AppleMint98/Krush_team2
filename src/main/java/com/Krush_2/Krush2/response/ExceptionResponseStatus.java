@@ -1,12 +1,10 @@
-package com.Krush_2.Krush2.exception;
+package com.Krush_2.Krush2.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
 @AllArgsConstructor
-public enum ErrorCode {
+public enum ExceptionResponseStatus implements BaseSatus {
 
   // global
   INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버에 문제가 발생했습니다."),
@@ -17,4 +15,11 @@ public enum ErrorCode {
 
   private final HttpStatus status;
   private final String message;
+
+  public HttpStatus getStatus() {
+    return status;
+  }
+  public String getMessage() {
+    return message;
+  }
 }

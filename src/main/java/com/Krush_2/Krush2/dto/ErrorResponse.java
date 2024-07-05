@@ -1,6 +1,6 @@
 package com.Krush_2.Krush2.dto;
 
-import com.Krush_2.Krush2.exception.ErrorCode;
+import com.Krush_2.Krush2.response.ExceptionResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ErrorResponse {
 
-  private ErrorCode errorCode;
+  private ExceptionResponseStatus errorCode;
   private String errorMessage;
 }
