@@ -2,7 +2,6 @@ package com.Krush_2.Krush2.response;
 
 import com.Krush_2.Krush2.response.status.BaseSatus;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

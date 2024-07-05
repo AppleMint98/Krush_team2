@@ -14,7 +14,6 @@ public class SubGoal extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String contents;
-    private Boolean isIntensityChangeable;
     private String emoji;
 
     @ManyToOne(fetch = FetchType.LAZY)

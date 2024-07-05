@@ -14,7 +14,10 @@ public enum ExceptionResponseStatus implements BaseSatus {
   INVALID_HEADER(HttpStatus.BAD_REQUEST, "헤더의 유저 id가 올바르지 않습니다."),
 
   // member
-  DUPLICATION_LOGIN_ID(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다.");
+  DUPLICATION_LOGIN_ID(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다."),
+
+  // goal
+  GOAL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 목표 입니다.");
 
   private final HttpStatus status;
   private final String message;
