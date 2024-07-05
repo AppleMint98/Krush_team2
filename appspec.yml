@@ -4,6 +4,8 @@ os: linux
 spring:
   mvc:
     throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
 files:
   - source: /
     destination: /home/ubuntu/drcloud-deploy
