@@ -37,6 +37,10 @@ jobs:
         with:
           arguments: clean build -x test
 
+      # gradlew 권한 설정
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       # AWS 인증
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
