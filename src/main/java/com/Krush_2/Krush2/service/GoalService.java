@@ -6,7 +6,7 @@ import com.Krush_2.Krush2.dto.GoalDto;
 import com.Krush_2.Krush2.exception.CustomException;
 import com.Krush_2.Krush2.repository.GoalRepository;
 import com.Krush_2.Krush2.repository.SubGoalRepository;
-import com.Krush_2.Krush2.response.ExceptionResponseStatus;
+import com.Krush_2.Krush2.response.status.ExceptionResponseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
