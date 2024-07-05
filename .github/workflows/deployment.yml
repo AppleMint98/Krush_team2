@@ -22,7 +22,7 @@ jobs:
     steps:
       # 체크아웃
       - name: checkout release
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       # JDK 17 세팅
       - name: set up JDK
@@ -47,15 +47,17 @@ jobs:
 
       # 빌드 결과물 S3 버킷에 업로드
       - name: upload to AWS S3
-        run: aws deploy push
-          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
-          --ignore-hidden-files \
-          --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
-          --source .
+        run: |
+          aws deploy push
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --ignore-hidden-files \
+            --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
+            --source .
 
       - name: deploy with AWS codeDeploy
-        run: aws deploy create-deployment
-          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-          --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+        run: |
+          aws deploy create-deployment
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
