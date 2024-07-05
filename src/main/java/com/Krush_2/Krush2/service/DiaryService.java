@@ -17,33 +17,33 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DiaryService {
 
-  private final GoalRepository goalRepository;
-  private final SubGoalRepository subGoalRepository;
-  private final DiaryRepository diaryRepository;
+    private final GoalRepository goalRepository;
+    private final SubGoalRepository subGoalRepository;
+    private final DiaryRepository diaryRepository;
 
 
-  public void register(long subGoalId) {
-    SubGoal subGoal = validateSubGoalId(subGoalId);
-    Optional<Diary> diary = diaryRepository.findBySubGoal(subGoal);
-    if (diary.isPresent()) {
-      diary.get().changeStatusToInActive();
-      diaryRepository.save(diary.get());
-      return;
+    public void register(long subGoalId) {
+        SubGoal subGoal = validateSubGoalId(subGoalId);
+        Optional<Diary> diary = diaryRepository.findBySubGoal(subGoal);
+        if (diary.isPresent()) {
+            diary.get().changeStatusToInActive();
+            diaryRepository.save(diary.get());
+            return;
+        }
+        validateGoalId(subGoal.getGoal());
+        diaryRepository.save(Diary.builder()
+                .subGoal(subGoal)
+                .build());
     }
-    validateGoalId(subGoal.getGoal());
-    diaryRepository.save(Diary.builder()
-      .subGoal(subGoal)
-      .build());
-  }
 
-  public void validateGoalId(Goal goal) {
-    if (!goalRepository.existsById(goal.getId())) {
-      throw new CustomException(ExceptionResponseStatus.GOAL_NOT_FOUND);
+    public void validateGoalId(Goal goal) {
+        if (!goalRepository.existsById(goal.getId())) {
+            throw new CustomException(ExceptionResponseStatus.GOAL_NOT_FOUND);
+        }
     }
-  }
 
-  public SubGoal validateSubGoalId(long subGoalId) {
-    return subGoalRepository.findById(subGoalId)
-      .orElseThrow(() -> new CustomException(ExceptionResponseStatus.SUB_GOAL_NOT_FOUND));
-  }
+    public SubGoal validateSubGoalId(long subGoalId) {
+        return subGoalRepository.findById(subGoalId)
+                .orElseThrow(() -> new CustomException(ExceptionResponseStatus.SUBGOAL_NOT_FOUND));
+    }
 }

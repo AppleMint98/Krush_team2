@@ -82,7 +82,7 @@ public class GoalService {
             .map(SubGoalDto::from)
             .collect(Collectors.toList());
 
-    int entireGoals = (int) goalRepository.count();
+    int entireGoals = (int) subGoalRepository.count();
     int dayGoals = subGoals.size();
     int dayCompleteGoals = diaries.size();
 
