@@ -5,7 +5,19 @@ spring:
 ---
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${MYSQL_URL}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql : true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
+#    org.hibernate.orm.jdbc.bind: trace
