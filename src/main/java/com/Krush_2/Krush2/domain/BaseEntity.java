@@ -14,8 +14,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@ToString
 @MappedSuperclass
 @EntityListeners(value = {AuditingEntityListener.class})
 public class BaseEntity {
@@ -29,4 +27,8 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
 
     private String status = "Active";
+
+    public void changeStatusToInActive() {
+        this.status = "InActive";
+    }
 }

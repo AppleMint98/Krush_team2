@@ -3,7 +3,6 @@ package com.Krush_2.Krush2.service;
 import com.Krush_2.Krush2.domain.Diary;
 import com.Krush_2.Krush2.domain.Goal;
 import com.Krush_2.Krush2.domain.SubGoal;
-import com.Krush_2.Krush2.dto.DiaryRequest;
 import com.Krush_2.Krush2.exception.CustomException;
 import com.Krush_2.Krush2.repository.DiaryRepository;
 import com.Krush_2.Krush2.repository.GoalRepository;
@@ -11,7 +10,6 @@ import com.Krush_2.Krush2.repository.SubGoalRepository;
 import com.Krush_2.Krush2.response.status.ExceptionResponseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
@@ -25,17 +23,16 @@ public class DiaryService {
 
 
   public void register(long subGoalId) {
-    Optional<SubGoal> subGoal = subGoalRepository.findById(subGoalId);
-    if (subGoal.isPresent()) {
-      SubGoal editedSubGoal = subGoal.get();
-      editedSubGoal.setStatus("InActive");
-      subGoalRepository.save(editedSubGoal);
-      System.out.println(editedSubGoal.toString());
+    SubGoal subGoal = validateSubGoalId(subGoalId);
+    Optional<Diary> diary = diaryRepository.findBySubGoal(subGoal);
+    if (diary.isPresent()) {
+      diary.get().changeStatusToInActive();
+      diaryRepository.save(diary.get());
       return;
     }
-    validateGoalId(subGoal.get().getGoal());
+    validateGoalId(subGoal.getGoal());
     diaryRepository.save(Diary.builder()
-      .subGoal(subGoal.get())
+      .subGoal(subGoal)
       .build());
   }
 
@@ -43,5 +40,10 @@ public class DiaryService {
     if (!goalRepository.existsById(goal.getId())) {
       throw new CustomException(ExceptionResponseStatus.GOAL_NOT_FOUND);
     }
+  }
+
+  public SubGoal validateSubGoalId(long subGoalId) {
+    return subGoalRepository.findById(subGoalId)
+      .orElseThrow(() -> new CustomException(ExceptionResponseStatus.SUB_GOAL_NOT_FOUND));
   }
 }
