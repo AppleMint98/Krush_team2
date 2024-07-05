@@ -1,10 +1,6 @@
 package com.Krush_2.Krush2.domain;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-=======
->>>>>>> 87b3a05a88b3a4d0b2e3cab94afe625da8e89958
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,13 +27,7 @@ public class Diary extends BaseEntity{
     private SubGoal subGoal;
 
     @ManyToOne(fetch = FetchType.LAZY)
-<<<<<<< HEAD
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
-
-=======
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
->>>>>>> 87b3a05a88b3a4d0b2e3cab94afe625da8e89958
 
 }

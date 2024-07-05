@@ -3,17 +3,14 @@ package com.Krush_2.Krush2.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-<<<<<<< HEAD
 
-=======
->>>>>>> 87b3a05a88b3a4d0b2e3cab94afe625da8e89958
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "SubGoal")
-public class SubGoal extends BaseEntity{
+public class SubGoal extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +32,4 @@ public class SubGoal extends BaseEntity{
 
     @OneToMany(mappedBy = "subGoal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Diary> diaries;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 87b3a05a88b3a4d0b2e3cab94afe625da8e89958
