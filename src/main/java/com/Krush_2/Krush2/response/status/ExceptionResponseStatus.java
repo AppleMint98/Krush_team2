@@ -1,4 +1,4 @@
-package com.Krush_2.Krush2.response;
+package com.Krush_2.Krush2.response.status;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +9,9 @@ public enum ExceptionResponseStatus implements BaseSatus {
   // global
   INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버에 문제가 발생했습니다."),
   INVALID_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
+  //Header
+  EMPTY_HEADER(HttpStatus.BAD_REQUEST, "헤더의 유저 id가 포함되어 있지 않습니다."),
+  INVALID_HEADER(HttpStatus.BAD_REQUEST, "헤더의 유저 id가 올바르지 않습니다."),
 
   // member
   DUPLICATION_LOGIN_ID(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다."),

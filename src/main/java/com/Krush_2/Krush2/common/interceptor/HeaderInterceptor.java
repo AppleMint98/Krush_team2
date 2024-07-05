@@ -1,5 +1,7 @@
 package com.Krush_2.Krush2.common.interceptor;
 
+import com.Krush_2.Krush2.exception.header.HeaderEmptyException;
+import com.Krush_2.Krush2.response.status.ExceptionResponseStatus;
 import com.Krush_2.Krush2.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserIdInterceptor implements HandlerInterceptor {
+public class HeaderInterceptor implements HandlerInterceptor {
 
     private final MemberService memberService;
 
@@ -30,10 +32,10 @@ public class UserIdInterceptor implements HandlerInterceptor {
 
     private void validateUserId(String userId) {
         if (userId == null) {
-            // throw exception
+            throw new HeaderEmptyException(ExceptionResponseStatus.EMPTY_HEADER);
         }
         if(!memberService.existLoginId(userId)){
-            // throw exception
+            throw new HeaderEmptyException(ExceptionResponseStatus.INVALID_HEADER);
         }
     }
 }

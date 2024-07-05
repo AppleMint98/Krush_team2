@@ -4,12 +4,12 @@ import com.Krush_2.Krush2.response.status.BaseSatus;
 import lombok.Getter;
 
 @Getter
-public class HeaderBadRequestException extends RuntimeException {
+public class HeaderEmptyException extends HeaderBadRequestException {
 
     private final BaseSatus errorCode;
 
-    public HeaderBadRequestException(BaseSatus errorCode) {
-        super(errorCode.getMessage());
+    public HeaderEmptyException(BaseSatus errorCode) {
+        super(errorCode);
         this.errorCode = errorCode;
     }
 }
