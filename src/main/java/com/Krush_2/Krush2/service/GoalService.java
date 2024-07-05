@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,5 +58,14 @@ public class GoalService {
       List<SubGoal> subGoals = subGoalRepository.findAllByGoal(goal);
       return GoalDto.from(goal, subGoals);
     }).collect(Collectors.toList());
+  }
+
+  public List<GoalDto> getInProgress() {
+    List<Goal> inProgressGoalList = goalRepository.findAllByEndAtAfter(LocalDate.now());
+    List<GoalDto> goalDtoList = new ArrayList<>();
+    inProgressGoalList.forEach(x -> {
+      goalDtoList.add(GoalDto.from(x, subGoalRepository.findAllByGoal(x)));
+    });
+    return goalDtoList;
   }
 }

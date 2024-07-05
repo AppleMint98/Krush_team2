@@ -13,5 +13,7 @@ public interface GoalRepository extends JpaRepository<Goal, Long> {
 
   boolean existsByContents(String contents);
 
-  List<Goal> findByEndAtBefore(LocalDate date);
+  List<Goal> findByEndAtBefore(LocalDate endAt);
+
+  List<Goal> findAllByEndAtAfter(LocalDate endAt);
 }
