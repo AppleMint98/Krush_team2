@@ -1,6 +1,9 @@
 version: 0.0
 os: linux
 
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
 files:
   - source: /
     destination: /home/ubuntu/drcloud-deploy
