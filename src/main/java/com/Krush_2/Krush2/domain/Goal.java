@@ -29,6 +29,4 @@ public class Goal extends BaseEntity{
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubGoal> subGoals;
-
-
 }
