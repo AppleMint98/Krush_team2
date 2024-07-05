@@ -30,4 +30,9 @@ public class GoalController {
     public ResponseEntity<List<GoalDto>> getPastGoals() {
         return ResponseEntity.ok(goalService.getPastGoals());
     }
+
+    @GetMapping("/in-progress")
+    public ResponseEntity<List<GoalDto>> getInProgress() {
+        return ResponseEntity.ok(goalService.getInProgress());
+    }
 }
