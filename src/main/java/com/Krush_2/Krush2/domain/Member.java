@@ -1,23 +1,21 @@
 package com.Krush_2.Krush2.domain;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.*;
 
 @Entity
 @Getter
-@Setter
-@Table(name = "member")
-public class Member extends BaseEntity{
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long memberId;
-
-    @Column(name = "user_id", nullable = false)
-    private String user_id;
-
-    @Column(name = "password", nullable = false)
+    private Long id;
+    private String loginId;
     private String password;
 }

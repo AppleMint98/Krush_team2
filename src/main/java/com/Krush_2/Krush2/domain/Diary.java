@@ -1,33 +1,27 @@
 package com.Krush_2.Krush2.domain;
 
-import java.time.LocalDate;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
-@Setter
-@Table(name = "Diary")
-public class Diary extends BaseEntity{
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Diary extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diary_id")
-    private Long diaryId;
+    private Long id;
 
-    @Column(name = "contents", length = 6)
-    private String contents;
-
-    @Column(name = "date", nullable = false)
-    private LocalDate date;
+    private String memo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sub_goal_id", nullable = false)
+    @JoinColumn
     private SubGoal subGoal;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn
     private Member member;
 
 }
