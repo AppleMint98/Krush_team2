@@ -10,7 +10,9 @@ import com.Krush_2.Krush2.response.status.ExceptionResponseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +49,13 @@ public class GoalService {
       .orElseThrow(() -> new CustomException(ExceptionResponseStatus.GOAL_NOT_FOUND));
     List<SubGoal> subGoalList = subGoalRepository.findAllByGoal(goal);
     return GoalDto.from(goal, subGoalList);
+  }
+
+  public List<GoalDto> getPastGoals() {
+    List<Goal> pastGoals = goalRepository.findByEndAtBefore(LocalDate.now());
+    return pastGoals.stream().map(goal -> {
+      List<SubGoal> subGoals = subGoalRepository.findAllByGoal(goal);
+      return GoalDto.from(goal, subGoals);
+    }).collect(Collectors.toList());
   }
 }
