@@ -16,13 +16,13 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
     private final HeaderInterceptor headerInterceptor;
     private final HeaderHandlerArgumentResolver headerHandlerArgumentResolver;
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(headerInterceptor)
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/member/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(headerInterceptor)
+//                .order(1)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/member/**");
+//    }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
