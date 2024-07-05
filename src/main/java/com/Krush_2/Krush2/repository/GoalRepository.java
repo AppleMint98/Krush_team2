@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GoalRepository extends JpaRepository<Goal, Long> {
-    Optional<Goal> findById(long goalId);
 
-    List<Goal> findByEndAtBefore(LocalDate date);
+  Optional<Goal> findById(long goalId);
+
+  boolean existsByContents(String contents);
+
+  List<Goal> findByEndAtBefore(LocalDate date);
 }

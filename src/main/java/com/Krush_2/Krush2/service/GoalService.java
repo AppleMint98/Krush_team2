@@ -18,37 +18,44 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GoalService {
 
-    private final GoalRepository goalRepository;
-    private final SubGoalRepository subGoalRepository;
+  private final GoalRepository goalRepository;
+  private final SubGoalRepository subGoalRepository;
 
-    public void register(GoalDto request) {
-        Goal savedGoal = goalRepository.save(Goal.builder()
-                .startAt(request.getStartAt())
-                .endAt(request.getEndAt())
-                .contents(request.getContents())
-                .build());
-        request.getSubGoalList().forEach(x -> {
-                    subGoalRepository.save(SubGoal.builder()
-                            .goal(savedGoal)
-                            .contents(x.getContents())
-                            .emoji(x.getEmoji())
-                            .build());
-                }
-        );
-    }
+  public void register(GoalDto request) {
+    validateGoalContents(request.getContents());
+    Goal savedGoal = goalRepository.save(Goal.builder()
+      .startAt(request.getStartAt())
+      .endAt(request.getEndAt())
+      .contents(request.getContents())
+      .build());
+    request.getSubGoalList().forEach(x -> {
+        subGoalRepository.save(SubGoal.builder()
+          .goal(savedGoal)
+          .contents(x.getContents())
+          .emoji(x.getEmoji())
+          .build());
+      }
+    );
+  }
 
-    public GoalDto getInfo(long goalId) {
-        Goal goal = goalRepository.findById(goalId)
-                .orElseThrow(() -> new CustomException(ExceptionResponseStatus.GOAL_NOT_FOUND));
-        List<SubGoal> subGoalList = subGoalRepository.findAllByGoal(goal);
-        return GoalDto.from(goal, subGoalList);
+  private void validateGoalContents(String contents) {
+    if (goalRepository.existsByContents(contents)) {
+      throw new CustomException(ExceptionResponseStatus.DUPLICATION_GOAL_CONTENTS);
     }
+  }
 
-    public List<GoalDto> getPastGoals() {
-        List<Goal> pastGoals = goalRepository.findByEndAtBefore(LocalDate.now());
-        return pastGoals.stream().map(goal -> {
-            List<SubGoal> subGoals = subGoalRepository.findAllByGoal(goal);
-            return GoalDto.from(goal, subGoals);
-        }).collect(Collectors.toList());
-    }
+  public GoalDto getInfo(long goalId) {
+    Goal goal = goalRepository.findById(goalId)
+      .orElseThrow(() -> new CustomException(ExceptionResponseStatus.GOAL_NOT_FOUND));
+    List<SubGoal> subGoalList = subGoalRepository.findAllByGoal(goal);
+    return GoalDto.from(goal, subGoalList);
+  }
+
+  public List<GoalDto> getPastGoals() {
+    List<Goal> pastGoals = goalRepository.findByEndAtBefore(LocalDate.now());
+    return pastGoals.stream().map(goal -> {
+      List<SubGoal> subGoals = subGoalRepository.findAllByGoal(goal);
+      return GoalDto.from(goal, subGoals);
+    }).collect(Collectors.toList());
+  }
 }
