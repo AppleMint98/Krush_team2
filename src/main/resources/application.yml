@@ -20,7 +20,11 @@ spring:
 #logging:
 #  level:
 #    org.hibernate.SQL: debug
+<<<<<<< HEAD
+#    org.hibernate.orm.jdbc.bind: trace
+=======
 #    org.hibernate.orm.jdbc.bind: trace
 
 
 
+>>>>>>> 87b3a05a88b3a4d0b2e3cab94afe625da8e89958
