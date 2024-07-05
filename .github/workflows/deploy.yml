@@ -2,9 +2,8 @@ name: Team2 Deploy to Amazon EC2
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: 
+      - main
 
   workflow_dispatch:
 
@@ -19,7 +18,9 @@ permissions:
 
 jobs:
   build:
+    name: Deploy
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       # 체크아웃
