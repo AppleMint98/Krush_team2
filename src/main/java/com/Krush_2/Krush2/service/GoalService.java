@@ -1,9 +1,13 @@
 package com.Krush_2.Krush2.service;
 
+import com.Krush_2.Krush2.domain.Diary;
 import com.Krush_2.Krush2.domain.Goal;
 import com.Krush_2.Krush2.domain.SubGoal;
 import com.Krush_2.Krush2.dto.GoalDto;
+import com.Krush_2.Krush2.dto.HistoryResponseDto;
+import com.Krush_2.Krush2.dto.SubGoalDto;
 import com.Krush_2.Krush2.exception.CustomException;
+import com.Krush_2.Krush2.repository.DiaryRepository;
 import com.Krush_2.Krush2.repository.GoalRepository;
 import com.Krush_2.Krush2.repository.SubGoalRepository;
 import com.Krush_2.Krush2.response.status.ExceptionResponseStatus;
@@ -21,7 +25,7 @@ public class GoalService {
 
   private final GoalRepository goalRepository;
   private final SubGoalRepository subGoalRepository;
-
+  private final DiaryRepository diaryRepository;
   public void register(GoalDto request) {
     validateGoalContents(request.getContents());
     Goal savedGoal = goalRepository.save(Goal.builder()
@@ -67,5 +71,30 @@ public class GoalService {
       goalDtoList.add(GoalDto.from(x, subGoalRepository.findAllByGoal(x)));
     });
     return goalDtoList;
+  }
+
+  public HistoryResponseDto getHistory(int year, int month, int day) {
+    LocalDate date = LocalDate.of(year, month, day);
+    List<SubGoal> subGoals = subGoalRepository.findByCreatedAtBetween(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+    List<Diary> diaries = diaryRepository.findByCreatedAtBetween(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+
+    List<SubGoalDto> subGoalDtos = subGoals.stream()
+            .map(SubGoalDto::from)
+            .collect(Collectors.toList());
+
+    int entireGoals = (int) goalRepository.count();
+    int dayGoals = subGoals.size();
+    int dayCompleteGoals = diaries.size();
+
+    HistoryResponseDto.ResultDto resultDto = HistoryResponseDto.ResultDto.builder()
+            .content(subGoalDtos)
+            .dayCompleteGoals(dayCompleteGoals)
+            .dayGoals(dayGoals)
+            .entireGoals(entireGoals)
+            .build();
+
+    return HistoryResponseDto.builder()
+            .result(resultDto)
+            .build();
   }
 }
