@@ -20,7 +20,11 @@ public class BaseEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+<<<<<<< HEAD
     @Column(name = "status", nullable = false)
+=======
+    @Column(name = "status", nullable = false, length = 10)
+>>>>>>> 87b3a05a88b3a4d0b2e3cab94afe625da8e89958
     private String status = "Active";
 
     @PrePersist
